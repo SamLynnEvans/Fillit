@@ -1,0 +1,3 @@
+protect mallocs
+check error messages
+close file
