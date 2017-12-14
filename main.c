@@ -1,96 +1,6 @@
 #include "fillit.h"
 #include <stdio.h>
 
-void build_array(int *tlib, char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-	{
-		tlib[i] = s[i] - '0';	
-		i++;
-	}
-}
-
-void	build_tetrimino_library(int tets[19][8])
-{
-	int	i;
-
-	i = 0;
-	build_array(tets[i++], "00010203");
-	build_array(tets[i++], "00102030");
-	build_array(tets[i++], "10200111");
-	build_array(tets[i++], "00011112");
-	build_array(tets[i++], "00101121");
-	build_array(tets[i++], "10011102");
-	build_array(tets[i++], "00100111");
-	build_array(tets[i++], "10011121");
-	build_array(tets[i++], "00011102");
-	build_array(tets[i++], "00102011");
-	build_array(tets[i++], "10011112");
-	build_array(tets[i++], "00100102");
-	build_array(tets[i++], "00102021");
-	build_array(tets[i++], "10110212");
-	build_array(tets[i++], "00011121");
-	build_array(tets[i++], "00101112");
-	build_array(tets[i++], "00102001");
-	build_array(tets[i++], "00010212");
-	build_array(tets[i++], "20011121");
-}
-
-int check_format(char *buff)
-{
-	int		i;
-	int		offset;
-
-	offset = -1;
-	i = 0;
-	while (buff[i])
-	{
-		if ((i + 1) % 21 == 0 && buff[i] != '\n')
-			return (-1);
-		else if ((i - offset) % 5 == 0 && buff[i] != '\n')
-			return (-1);
-		else if (buff[i] != '#' && buff[i] != '.' && (i + 1) % 21 != 0 && (i - offset) % 5 != 0)
-			return (-1);
-		if ((i + 1) % 21 == 0)
-			offset++;
-		i++;
-	}
-	if ((i + 1) % 21 != 0)
-		return (-1);
-	return (offset + 2);
-}
-
-int	get_coordinates(char *buff, int map_count, int coordinates[map_count][8])
-{	
-	int	i;
-	int	j;
-	int	c;
-
-	c = 0;
-	i = -1;
-	j = 0;
-	while (buff[++i])
-	{
-		if (buff[i] == '#')
-		{
-			coordinates[j][c++] = i % 5;
-			coordinates[j][c++] = i / 5;
-		}
-		if (i == 20)
-		{
-			ft_memmove(buff, &buff[21], ft_strlen(buff) + 1);
-			if (c != 8)
-				return (0);
-			c = 0;
-			j++;
-			i = -1;
-		}
-	}
-	return ((c == 8) ? 1 : 0);	
-}
 
 int	check_for_match(int *input_coordinates, int *tlib_coordinates)
 {
@@ -103,16 +13,11 @@ int	check_for_match(int *input_coordinates, int *tlib_coordinates)
 	i = 0;
 	while (i < 8)
 	{
-		input_coordinates[i] -= x;
-		input_coordinates[i + 1] -= y;
+		if (input_coordinates[i] - x != tlib_coordinates[i])
+			return (0);
+		if (input_coordinates[i + 1] - y != tlib_coordinates[i + 1])
+			return (0);
 		i += 2;
-	}
-	i = 0;
-	while (i < 8)
-	{
-		if (input_coordinates[i] != tlib_coordinates[i])
-				return (0);
-		i++;
 	}
 	return (1);
 } 
