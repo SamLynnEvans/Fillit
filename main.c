@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:30:02 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 11:36:35 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/14 15:51:15 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	backtrack_filler(int i, int **tetriminos, char **square, int row, int col, int size)
+int	backtrack_filler(int i, t_tetrimino **tetriminos, char **square, int row, int col, int size)
 {
 	if (col >= size)
 	{
@@ -21,14 +21,14 @@ int	backtrack_filler(int i, int **tetriminos, char **square, int row, int col, i
 	}
 	while (row < size)
 	{
-		if (put_tetrimino(tetriminos[i], square, row, col, i, size))
+		if (put_tetrimino(tetriminos[i]->coordinates, square, row, col, i, size))
 		{
 			if (tetriminos[i + 1] == 0)
 				return (1);
 			else if (backtrack_filler(i + 1, tetriminos, square, row, col + 1, size))
 				return (1);
 			else
-				remove_tetrimino(tetriminos[i], square, row, col);
+				remove_tetrimino(tetriminos[i]->coordinates, square, row, col);
 		}
 		col++;
 		if (col >= size)
@@ -40,7 +40,7 @@ int	backtrack_filler(int i, int **tetriminos, char **square, int row, int col, i
 	return (0);
 }
 
-int	solver(int **tetriminos, int size)
+int	solver(t_tetrimino **tetriminos, int size)
 {
 	char	**square;
 	int		row;
@@ -72,14 +72,29 @@ int	solver(int **tetriminos, int size)
 	return (1);
 }
 
+int	get_size(int map_count)
+{
+	int num;
+
+	num = 0;
+	int minimum_area = map_count * 4;
+	while (1)
+	{
+		if (num * num > minimum_area)
+			break ;
+		num++;
+	}
+	return (num);
+}
+
 int		setup_solver(char *buff, int map_count)
 {
-	int			tlib[19][8];
-	int			coordinates[map_count][8];
-	int			**tetriminos;
-	int			size;
+	int				tlib[19][8];
+	int				coordinates[map_count][8];
+	t_tetrimino		**tetriminos;
+	int				size;
 
-	size = 2;
+	size = get_size(map_count);
 	if (!get_coordinates(buff, map_count, coordinates))
 		return (-1);
 	build_tetrimino_library(tlib);
