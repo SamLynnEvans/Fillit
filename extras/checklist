@@ -1,3 +1,5 @@
 protect mallocs
 check error messages
 close file
+relinking in Makefile?
+why use EXIT?

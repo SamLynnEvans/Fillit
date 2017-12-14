@@ -68,7 +68,7 @@ NAME = libft.a
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	gcc -c -Wall -Wextra -Werror $(SRC) -Ilibft.h
 	ar rc $(NAME) $(OBJ)
 
