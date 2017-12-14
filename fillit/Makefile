@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 11:12:50 by slynn-ev          #+#    #+#              #
-#    Updated: 2017/12/14 21:05:07 by slynn-ev         ###   ########.fr        #
+#    Updated: 2017/12/14 22:15:20 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ check_format.c \
 get_coordinates.c \
 main.c \
 put_remove_tet.c \
+print_square.c \
+get_size.c \
 
 NAME = fillit
 

@@ -1,3 +1,0 @@
-create y.max and x.max to prevent unnecessary checking, also don't need to send size variable to putter.
-create single string??
-make initial size linked to map_count

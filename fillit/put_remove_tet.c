@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:36:57 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 16:54:39 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/14 21:53:31 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	put_tetrimino(t_tetrimino *tetrimino, char **square, int row, int col)
+int		put_tetrimino(t_tetrimino *tetrimino, char **square, int row, int col)
 {
 	int	i;
 	int x;
@@ -35,11 +35,11 @@ int	put_tetrimino(t_tetrimino *tetrimino, char **square, int row, int col)
 		square[y][x] = tetrimino->order + 'A';
 		i += 2;
 	}
-	tetrimino->put = 1;
 	return (1);
 }
 
-void	remove_tetrimino(t_tetrimino *tetrimino, char **square, int row, int col)
+void	remove_tetrimino(t_tetrimino *tetrimino,
+char **square, int row, int col)
 {
 	int	i;
 	int x;
@@ -53,5 +53,4 @@ void	remove_tetrimino(t_tetrimino *tetrimino, char **square, int row, int col)
 		square[y][x] = '.';
 		i += 2;
 	}
-	tetrimino->put = 0;
 }
