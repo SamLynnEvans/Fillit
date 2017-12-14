@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 11:12:50 by slynn-ev          #+#    #+#              #
-#    Updated: 2017/12/14 11:20:28 by slynn-ev         ###   ########.fr        #
+#    Updated: 2017/12/14 21:05:07 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ put_remove_tet.c \
 
 NAME = fillit
 
-all = $(NAME)
+all: $(NAME)
 
 OBJ = $(SRC:.c=.o)
 
-all: $(OBJ)
-	$(MAKE) re -C libft/
+$(NAME): $(OBJ)
+	$(MAKE) re -C ../libft/
 	gcc -c -Wall -Wextra -Werror $(SRC) -Ifillit.h
-	gcc -o $(NAME) $(OBJ) libft/libft.a
+	gcc -o $(NAME) $(OBJ) ../libft/libft.a
 
 clean:
 	rm -f $(OBJ)

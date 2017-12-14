@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:25:44 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 16:06:42 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:47:37 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_tetrimino *build_tet_struct(int *tlib, int order, int map_count)
 	tetrimino->x_max = x;
 	tetrimino->order = order;
 	tetrimino->last_piece = ((order + 1 == map_count) ? 1 : 0);
+	tetrimino->put = 0;
 	return (tetrimino);
 }
 

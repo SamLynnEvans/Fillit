@@ -6,33 +6,32 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:30:02 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 16:16:45 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/14 20:15:07 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	backtrack_filler(int i, t_tetrimino **tetriminos, char **square, int row, int col, int size)
+int	backtrack_filler(int i, t_tetrimino **tetriminos, char **square, int size)
 {
-	if (col >= size)
-	{
-		row++;
-		col = 0;
-	}
+	int	row;
+	int	col;
+	
+	row = 0;
+	col = 0;
 	while (row < size)
 	{
 		if (tetriminos[i]->y_max + row >= size)
 			return (0);
 		else if (tetriminos[i]->x_max + col >= size)
 			col = size - 1;
-		else if (put_tetrimino(tetriminos[i]->coordinates, square, row, col, i))
+		else if (put_tetrimino(tetriminos[i], square, row, col))
 		{
 			if (tetriminos[i + 1] == 0)
 				return (1);
-			else if (backtrack_filler(i + 1, tetriminos, square, row, col + 1, size))
-				return (1);
-			else
-				remove_tetrimino(tetriminos[i]->coordinates, square, row, col);
+			if (backtrack_filler(i + 1, tetriminos, square, size))
+						return (1);
+			remove_tetrimino(tetriminos[i], square, row, col);
 		}
 		col++;
 		if (col >= size)
@@ -62,7 +61,7 @@ int	solver(t_tetrimino **tetriminos, int size)
 		row++;
 	}
 	square[row] = 0;
-	if (!backtrack_filler(0, tetriminos, square, 0, 0, size))
+	if (!backtrack_filler(0, tetriminos, square, size))
 	{
 		free(square);
 		return (0);
@@ -84,7 +83,7 @@ int	get_size(int map_count)
 	int minimum_area = map_count * 4;
 	while (1)
 	{
-		if (num * num > minimum_area)
+		if (num * num >= minimum_area)
 			break ;
 		num++;
 	}
@@ -130,7 +129,7 @@ int	main(int ac, char **argv)
 		//close here
 		//add errors for read, open, close etc
 		if (setup_solver(buff, map_count) == -1)
-			ft_putstr("ERROR");
+			ft_putstr("error");
 	}
 	else
 		ft_putstr("change this message to usage error");
