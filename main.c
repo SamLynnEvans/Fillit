@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:30:02 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 15:51:15 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:16:45 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ int	backtrack_filler(int i, t_tetrimino **tetriminos, char **square, int row, in
 	}
 	while (row < size)
 	{
-		if (put_tetrimino(tetriminos[i]->coordinates, square, row, col, i, size))
+		if (tetriminos[i]->y_max + row >= size)
+			return (0);
+		else if (tetriminos[i]->x_max + col >= size)
+			col = size - 1;
+		else if (put_tetrimino(tetriminos[i]->coordinates, square, row, col, i))
 		{
 			if (tetriminos[i + 1] == 0)
 				return (1);

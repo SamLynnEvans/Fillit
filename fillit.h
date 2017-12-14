@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:30:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 15:49:15 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:17:40 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int				check_for_match(int *input_coordinates, int *tlib_coordinates);
 t_tetrimino		**assign_tetriminos(int map_count,
 int	coordinates[map_count][8], int tlib[19][8]);
 int				put_tetrimino(int *tetrimino, char **square,
-int row, int col, int alpha, int size);
+int row, int col, int alpha);
 void			remove_tetrimino(int *tetrimino, char **square, int row, int col);
 
 #endif
