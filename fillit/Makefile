@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 11:12:50 by slynn-ev          #+#    #+#              #
-#    Updated: 2017/12/14 22:15:20 by slynn-ev         ###   ########.fr        #
+#    Updated: 2017/12/15 15:29:26 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,20 +21,26 @@ print_square.c \
 get_size.c \
 
 NAME = fillit
-
+LIB = ../libft
+LIB_A = libft.a
+FLAG = -Wall -Werror -Wextra
+OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
-OBJ = $(SRC:.c=.o)
+%.o: %.c
+	 gcc -c $(FLAG) $<
 
-$(NAME): $(OBJ)
-	$(MAKE) re -C ../libft/
-	gcc -c -Wall -Wextra -Werror $(SRC) -Ifillit.h
-	gcc -o $(NAME) $(OBJ) ../libft/libft.a
+$(NAME): $(OBJ) $(LIB)
+	make -C $(LIB)
+	gcc $(FLAG) $(OBJ) $(LIB)/$(LIB_A) -o $(NAME) -Ifillit.h
 
 clean:
+	make clean -C $(LIB)
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(LIB)/$(LIB_A)
 
 re: fclean all
+
+.PHONY: all clean fclean re
