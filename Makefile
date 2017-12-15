@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 11:12:50 by slynn-ev          #+#    #+#              #
-#    Updated: 2017/12/15 15:29:26 by slynn-ev         ###   ########.fr        #
+#    Updated: 2017/12/15 15:33:54 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ print_square.c \
 get_size.c \
 
 NAME = fillit
-LIB = ../libft
+LIB = libft
 LIB_A = libft.a
 FLAG = -Wall -Werror -Wextra
 OBJ = $(SRC:.c=.o)

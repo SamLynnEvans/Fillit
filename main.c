@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:30:02 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/14 22:27:10 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2017/12/15 15:58:55 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,23 @@ int	main(int ac, char **argv)
 
 	if (ac == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
+		if ((fd = open(argv[1], O_RDONLY)) == -1)
+			exit(EXIT_SUCCESS);
 		ret = read(fd, buff, BUFF_SIZE);
 		buff[ret] = '\0';
 		if ((map_count = check_format(buff)) == -1 || map_count > 26)
 		{
 			ft_putstr("error");
-			return (1);
+			exit(EXIT_SUCCESS);
 		}
-		//close here
-		//add errors for read, open, close etc
+		close(fd);
 		if (setup_solver(buff, map_count) == -1)
+		{
 			ft_putstr("error");
+			exit(EXIT_SUCCESS);
+		}
 	}
 	else
-		ft_putstr("usage: fillit input_map\n");
-	return (0);
+		ft_putstr("usage: fillit map_file\n");
+	exit(EXIT_SUCCESS);
 }
